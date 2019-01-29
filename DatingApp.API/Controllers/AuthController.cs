@@ -23,7 +23,7 @@ namespace DatingApp.API.Controllers
             _config = config;
             _repo = repo;
         }
-
+        
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
         //automatically infers parameters from either body, query string, or form. [ApiController] handles inference (from body)
