@@ -97,7 +97,7 @@ namespace MindsMatter.Api.Controllers
             return BadRequest("Could not add photo");
         }
 
-        [HttpPost("{id}")]
+        [HttpPost("{id}/setMain")]
         public async Task<IActionResult> SetMainPhoto(int userId, int id)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
