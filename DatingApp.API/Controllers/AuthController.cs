@@ -30,7 +30,7 @@ namespace DatingApp.API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
         //automatically infers parameters from either body, query string, or form. [ApiController] handles inference (from body)
-        //can also use Register([FromBody]UserForRegisterDto paramName) without [ApiController] but then ModelState.IsValid must be true
+        //can also use Register([FromBody]UserForRegisterDto paramName) without [ApiController] but then ModelState.IsValid must be checked to be true
         {
             //validate the request
 
