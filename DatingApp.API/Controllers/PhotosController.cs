@@ -113,14 +113,14 @@ namespace MindsMatter.Api.Controllers
             if (photoFromRepo.IsMain)
                 return BadRequest("This is already the main photo");
 
-            var currentMainPhoto = await _repo.GetMainPhotoForUser(userId);
-            currentMainPhoto.IsMain = false;
-            photoFromRepo.IsMain = true;
+            // var currentMainPhoto = await _repo.GetMainPhotoForUser(userId);
+            // currentMainPhoto.IsMain = false;
+            // photoFromRepo.IsMain = true;
 
-            if (await _repo.SaveAll())
-            {
-                return NoContent();
-            }
+            // if (await _repo.SaveAll())
+            // {
+            //     return NoContent();
+            // }
 
             return BadRequest("Could not set photo to main");
         }
