@@ -36,8 +36,13 @@ namespace DatingApp.API.Controllers
             userParams.UserId = currentUserId;
 
             if (string.IsNullOrEmpty(userParams.Gender))
-            {
+            {                
                 userParams.Gender = userFromRepo.Gender == "male" ? "female" : "male";
+            }
+
+            if (userParams.Likees || userParams.Likers)
+            {
+                userParams.Gender = null;
             }
 
             var users = await _repo.GetUsers(userParams);
@@ -77,16 +82,20 @@ namespace DatingApp.API.Controllers
         [HttpPost("{id}/like/{recipientId}")]
         public async Task<IActionResult> LikeUser(int id, int recipientId)
         {
+            // checks authorization
             if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
             var like = await _repo.GetLike(id, recipientId);
 
+            if (id == recipientId)
+                return BadRequest("'Like' yourself on your own time! ;)");
+
             if (like != null)
                 return BadRequest("You already like this user");
 
             if (await _repo.GetUser(recipientId) == null)
-                return NotFound();
+                return NotFound(); // does recipient exist?
 
             like = new Like
             {
