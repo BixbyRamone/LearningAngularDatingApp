@@ -13,7 +13,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace DatingApp.API.Controllers
 {
     [ServiceFilter(typeof(LogUserActivity))]
-    [Authorize]
     [Route("api/users/{userId}/[controller]")]
     [ApiController]
     public class MessagesController : ControllerBase
@@ -120,7 +119,7 @@ namespace DatingApp.API.Controllers
             if (messageFromRepo.RecipientDeleted && messageFromRepo.SenderDeleted)
                 _repo.Delete(messageFromRepo);
 
-            if(await _repo.SaveAll());
+            if(await _repo.SaveAll())
                 return NoContent();
 
             throw new Exception("Error Deleting Message");
