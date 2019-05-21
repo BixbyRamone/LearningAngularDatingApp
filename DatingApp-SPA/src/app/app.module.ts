@@ -36,6 +36,10 @@ import { ListsResolver } from './_resolvers/lists.resolver';
 import { MessagesResolver } from './_resolvers/messages.resolver';
 import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
+import { HasRoleDirective } from './_directives/hasRole.directive';
+import { UserManagementComponent } from './admin/user-management/user-management.component';
+import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
+import { AdminService } from './_services/admin.service';
 
 
 export function tokenGetter() {
@@ -47,6 +51,7 @@ export function tokenGetter() {
       AdminPanelComponent,
       AppComponent,
       NavComponent,
+      HasRoleDirective,
       HomeComponent,
       RegisterComponent,
       MemberListComponent,
@@ -57,7 +62,9 @@ export function tokenGetter() {
       MemberEditComponent,
       MemberMessagesComponent,
       PhotoEditorComponent,
-      TimeAgoPipe
+      PhotoManagementComponent,
+      TimeAgoPipe,
+      UserManagementComponent
    ],
    imports: [
       BrowserModule,
@@ -82,6 +89,7 @@ export function tokenGetter() {
       })
    ],
    providers: [
+      AdminService,
       AuthService,
       ErrorInterceptorProvider,
       AlertifyService,
